@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- اضافه کردن بخش domain-config برای آی‌پی مورد نظر -->
+    <domain-config>
+        <domain includeSubdomains="true">185.137.27.221</domain>
+        <trust-anchors>
+            <!-- اعتماد به گواهی‌های سیستم و گواهی‌های کاربر -->
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>

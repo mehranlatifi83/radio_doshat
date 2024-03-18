@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">radio doshat</string>
+    <string name="welcome_message">سلام، به اپلیکیشن اختصاصی رادیو دو شات خوش آمدین</string>
+    <string name="play_button">پخش</string>
+    <string name="support_link_text">ارتباط با پشتیبانی</string>
+    <string name="follow_on_telegram">دنبال کردن در تلگرام</string>
+    <string name="follow_on_instagram">دنبال کردن در اینستاگرام</string>
 </resources>

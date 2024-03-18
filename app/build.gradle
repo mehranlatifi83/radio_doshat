@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'ir.codelighthouse.myapplication'
+    namespace 'ir.codelighthouse.radio_doshat'
     compileSdk 34
 
     defaultConfig {
@@ -29,6 +29,8 @@ android {
 }
 
 dependencies {
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
     implementation 'org.jsoup:jsoup:1.13.1'
     implementation 'com.google.android.exoplayer:exoplayer-core:2.18.0'
     implementation 'com.google.android.exoplayer:exoplayer-dash:2.18.0'

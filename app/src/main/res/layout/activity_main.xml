@@ -1,81 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"	
+    xmlns:tools="http://schemas.android.com/tools" 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/app_background"
+        android:scaleType="fitXY" />
 
     <TextView
         android:id="@+id/welcomeMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="سلام، به اپلیکیشن اختصاصی رادیو دو شات خوش آمدین"
+    android:fontFamily="@font/lalezar_regular"
+    android:textSize="@dimen/_12ssp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.1"/>
+    app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="0.35"/>
 
     <TextView
         android:id="@+id/statusBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
-        app:layout_constraintTop_toBottomOf="@id/welcomeMessage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.1"/>
+    android:fontFamily="@font/lalezar_regular"
+        app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="0.5"/>
 
     <Button
         android:id="@+id/playButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="پخش"
-        app:layout_constraintTop_toBottomOf="@id/statusBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.1"/>
+    android:fontFamily="@font/lalezar_regular"
+    android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
 
-    <TextView
-        android:id="@+id/supportLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ارتباط با پشتیبانی"
-        android:textColor="?attr/colorPrimary"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="openSupportLink"
-        app:layout_constraintTop_toBottomOf="@id/playButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.1"/>
+<TextView
+    android:id="@+id/supportLink"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="ارتباط با پشتیبانی"
+    android:textColor="#FFFFFF"
+    android:clickable="true"
+    android:focusable="true"
+    android:onClick="openSupportLink"
+    android:fontFamily="@font/lalezar_regular"
+    android:textSize="@dimen/_8ssp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    android:layout_marginRight="@dimen/_22sdp"
+    android:layout_marginBottom="@dimen/_100sdp"/>
 
-    <TextView
-        android:id="@+id/telegramLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="دنبال کردن در تلگرام"
-        android:textColor="?attr/colorPrimary"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="openTelegramLink"
-        app:layout_constraintTop_toBottomOf="@id/supportLink"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.1"/>
+<TextView
+    android:id="@+id/telegramLink"
+    android:layout_width="wrap_content"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content"
+    android:text="دنبال کردن در تلگرام"
+    android:textColor="#FFFFFF"
+    android:clickable="true"
+    android:focusable="true"
+    android:onClick="openTelegramLink"
+    android:textSize="@dimen/_8ssp"
+    android:fontFamily="@font/lalezar_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.825"/>
 
-    <TextView
-        android:id="@+id/instagramLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="دنبال کردن در اینستاگرام"
-        android:textColor="?attr/colorPrimary"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="openInstagramLink"
-        app:layout_constraintTop_toBottomOf="@id/telegramLink"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.1"/>
+<TextView
+    android:id="@+id/instagramLink"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="دنبال کردن در اینستاگرام"
+    android:textColor="#FFFFFF"
+    android:clickable="true"
+android:focusable="true"
+android:onClick="openInstagramLink"
+    android:fontFamily="@font/lalezar_regular"
+    android:textSize="@dimen/_8ssp"
+app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+android:layout_marginLeft="@dimen/_13sdp"
+android:layout_marginBottom="@dimen/_100sdp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

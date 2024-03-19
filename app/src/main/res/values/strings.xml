@@ -18,4 +18,5 @@
     <string name="url_get_country">http://ip-api.com/json</string>
     <string name="now_playing_with_next_song">در حال پخش %1$s - آهنگ بعدی: %2$s</string>
     <string name="now_playing">در حال پخش %1$s</string>
+    <string name="app_logo_discription">تصویری از لوگوی رادیو دو شات را نشان می‌دهد که روی پس‌زمینه‌ای به رنگ نارنجی قرار دارد. در مرکز تصویر، یک قلب معکوس دیده می‌شود که دو میکروفون درون آن و رو به یکدیگر قرار گرفته‌اند که نمادی از صدا و علاقه به موسیقی است. در پایین تصویر، نام "رادیو دو شات" به خط سفید و به زبان انگلیسی نوشته شده است.</string>
 </resources>

@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/app_background"
+    android:contentDescription="@string/app_logo_discription" />
         android:scaleType="fitXY" />
 
     <TextView

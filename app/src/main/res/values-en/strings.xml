@@ -18,4 +18,5 @@
     <string name="url_get_country">http://ip-api.com/json</string>
     <string name="now_playing_with_next_song">Now playing %1$s - Next song: %2$s</string>
     <string name="now_playing">Now playing %1$s</string>
+    <string name="app_logo_discription">The image features the logo of Radio Doshat set against an orange background. At the center is an inverted heart containing two microphones facing each other, symbolizing sound and a passion for music. At the bottom of the image, the name "Radio Doshat" is written in white English lettering.</string>
 </resources>

@@ -11,6 +11,17 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
     </style>
+
+    <style name="AppFontStyle">
+        <item name="android:fontFamily">@font/lalezar_regular</item>
+    </style>
+
+    <style name="AppLinkStyle" parent="AppFontStyle">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:textSize">@dimen/_8ssp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

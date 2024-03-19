@@ -1,6 +1,6 @@
 <resources>
-<string name="app_name">radio doshat</string>
-    <string name="welcome_message">سلام، به اپلیکیشن اختصاصی رادیو دو شات خوش آمدین</string>
+<string name="app_name">رادیو دو شات</string>
+    <string name="welcome_message">به اپلیکیشن اختصاصی رادیو دو شات خوش آمدین</string>
     <string name="play">پخش</string>
     <string name="pause">توقف</string>
     <string name="support">ارتباط با پشتیبانی</string>
@@ -16,6 +16,6 @@
     <string name="url_stream">http://dstt.ir:8000/dsradio.mp3</string>
     <string name="url_radio_information">http://dstt.ir:8000</string>
     <string name="url_get_country">http://ip-api.com/json</string>
-    <string name="now_playing_with_next_song">در حال پخش %1$s آهنگ بعدی: %2$s</string>
+    <string name="now_playing_with_next_song">در حال پخش %1$s - آهنگ بعدی: %2$s</string>
     <string name="now_playing">در حال پخش %1$s</string>
 </resources>

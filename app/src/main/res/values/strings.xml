@@ -1,8 +1,21 @@
 <resources>
-    <string name="app_name">radio doshat</string>
+<string name="app_name">radio doshat</string>
     <string name="welcome_message">سلام، به اپلیکیشن اختصاصی رادیو دو شات خوش آمدین</string>
-    <string name="play_button">پخش</string>
-    <string name="support_link_text">ارتباط با پشتیبانی</string>
-    <string name="follow_on_telegram">دنبال کردن در تلگرام</string>
-    <string name="follow_on_instagram">دنبال کردن در اینستاگرام</string>
+    <string name="play">پخش</string>
+    <string name="pause">توقف</string>
+    <string name="support">ارتباط با پشتیبانی</string>
+    <string name="telegram">دنبال کردن در تلگرام</string>
+    <string name="instagram">دنبال کردن در اینستاگرام</string>
+    <string name="loading">در حال بارگذاری...</string>
+    <string name="internet_error">خطا در اتصال به شبکه اینترنت. لطفا وضعیت اتصال به اینترنت خود را بررسی نمایید.</string>
+    <string name="server_error">خطایی از سمت سرور رادیو پیش آمد. لطفا تا زمان حل مشکل منتظر بمانید. تیم ما در تلاش برای هرچه سریعتر حل کردن مشکل میباشند</string>
+    <string name="vpn_error">لطفا جهت دسترسی به محتوای رادیو vpn خود را خاموش نمایید</string>
+    <string name="url_support">https://t.me/radio_doshat_bot</string>
+    <string name="url_telegram">https://t.me/radio_doshat</string>
+    <string name="url_instagram">https://www.instagram.com/radio_doshat_official</string>
+    <string name="url_stream">http://dstt.ir:8000/dsradio.mp3</string>
+    <string name="url_radio_information">http://dstt.ir:8000</string>
+    <string name="url_get_country">http://ip-api.com/json</string>
+    <string name="now_playing_with_next_song">در حال پخش %1$s آهنگ بعدی: %2$s</string>
+    <string name="now_playing">در حال پخش %1$s</string>
 </resources>

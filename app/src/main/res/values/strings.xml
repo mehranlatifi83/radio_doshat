@@ -10,7 +10,7 @@
     <string name="internet_error">خطا در اتصال به شبکه اینترنت. لطفا وضعیت اتصال به اینترنت خود را بررسی نمایید.</string>
     <string name="server_error">خطایی از سمت سرور رادیو پیش آمد. لطفا تا زمان حل مشکل منتظر بمانید. تیم ما در تلاش برای هرچه سریعتر حل کردن مشکل میباشند</string>
     <string name="vpn_error">لطفا جهت دسترسی به محتوای رادیو vpn خود را خاموش نمایید</string>
-    <string name="url_support">https://t.me/radio_doshat_bot</string>
+    <string name="url_support">https://t.me/radiodoshat</string>
     <string name="url_telegram">https://t.me/radio_doshat</string>
     <string name="url_instagram">https://www.instagram.com/radio_doshat_official</string>
     <string name="url_stream">http://dstt.ir:8000/dsradio.mp3</string>

@@ -52,18 +52,14 @@ public class MainActivity extends AppCompatActivity {
 			public void onReceive(Context context, Intent intent) {
 				if (checkInternetConnection()) {
 					checkForVpnIsConected();
-				if (! isVpnConected) {
-					if (player != null && player.isPlaying()) {
-						playButton.setText(getString(R.string.pause));
-					} else {
-						initializePlayer();
-						checkForSongChange();
-					}
-					playButton.setVisibility(View.VISIBLE);
-					statusBar.setText("");
-				} else {
+					if (! isVpnConected) {
 						if (player != null && player.isPlaying()) {
-							runOnUiThread(() -> player.pause());
+							playButton.setText(getString(R.string.pause));
+						} else {
+							initializePlayer();
+							checkForSongChange();
+							playButton.setVisibility(View.VISIBLE);
+							statusBar.setText("");
 						}
 					}
 				} else {
@@ -152,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 	private void checkForSongChange() {
 		final Handler handler = new Handler();
 		Runnable runnable = () -> {
-			if (isAppActive) {
+			if (isAppActive && ! isVpnConected) {
 				fetchCurrentSongName();
 			}
 			handler.postDelayed(this::checkForSongChange, 10000);
@@ -213,6 +209,7 @@ public class MainActivity extends AppCompatActivity {
 				if (isVpnConected == (country.equals("Iran"))) {
 					if (!country.equals("Iran")) {
 						runOnUiThread(() -> playButton.setVisibility(View.GONE));
+						runOnUiThread(() -> player.stop());
 						showErrorMessage(getString(R.string.vpn_error));
 						isVpnConected = true;
 					} else {

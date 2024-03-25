@@ -1,5 +1,6 @@
 package ir.codelighthouse.radio_doshat;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,8 +9,11 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PowerManager;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
 		playButton.setOnClickListener(v -> togglePlayback());
 
+		requestDisableBatteryOptimization();
 		networkChangeReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -222,6 +227,25 @@ public class MainActivity extends AppCompatActivity {
 			} catch (Exception e) {
 			}
 		}).start();
+	}
+
+	private void requestDisableBatteryOptimization() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			String packageName = getPackageName();
+			PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
+			if (!pm.isIgnoringBatteryOptimizations(packageName)) {
+				new AlertDialog.Builder(this)
+						.setTitle("اجازه غیرفعال کردن بهینه سازی باتری")
+						.setMessage("لطفا برای پخش شدن رادیو در پس زمینه در صورت خاموش شدن صفحه گوشی، لطفا اجازه غیرفعال کردن بهینه‌سازی باتری را بدهید.")
+						.setPositiveButton("باشه", (dialog, which) -> {
+							Intent intent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
+									.setData(Uri.parse("package:" + packageName));
+							startActivity(intent);
+						})
+						.setNegativeButton("لغو", null)
+						.show();
+			}
+		}
 	}
 
 	private void showErrorMessage(String message) {

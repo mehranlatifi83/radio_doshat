@@ -6,6 +6,7 @@
     <!-- اضافه کردن دسترسی به اینترنت -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
 
     <application
         android:localeConfig="@xml/locale_config"

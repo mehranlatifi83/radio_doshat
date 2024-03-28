@@ -25,7 +25,7 @@ jobs:
       
       - name: Send APK to Telegram
         env:
-          TELEGRAM_BOT_TOKEN: 6466546352:AAHRMTWju6CZoK7pqWIaVbWLpeiSgbCbSic
-          CHAT_ID: -1002081135128
+          TELEGRAM_BOT_TOKEN: TELEGRAM_BOT_TOKEN
+          CHAT_ID: TELEGRAM_CHAT_ID
         run: |
           curl -F document=@${{ steps.find-apk.outputs.apk_path }} -F chat_id=$CHAT_ID -F caption="${{ env.COMMIT_MESSAGES }}" https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendDocument

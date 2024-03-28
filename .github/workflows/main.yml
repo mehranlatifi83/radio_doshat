@@ -10,22 +10,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       
       - name: Get commit messages
-        id: get-commit-messages
         run: |
           echo "COMMIT_MESSAGES=$(git log --format='%H %s by %an' -n 5)" >> $GITHUB_ENV
       
       - name: Find APK file
-        id: find-apk
         run: |
           apk_path=$(find ./app/release -name '*.apk' | head -n 1)
-          echo "::set-output name=apk_path::$apk_path"
+          echo "APK_PATH=$apk_path" >> $GITHUB_ENV
       
       - name: Send APK to Telegram
         env:
-          TELEGRAM_BOT_TOKEN: TELEGRAM_BOT_TOKEN
-          CHAT_ID: TELEGRAM_CHAT_ID
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          curl -F document=@${{ steps.find-apk.outputs.apk_path }} -F chat_id=$CHAT_ID -F caption="${{ env.COMMIT_MESSAGES }}" https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendDocument
+          curl -F document="@${APK_PATH}" -F chat_id=$CHAT_ID -F caption="${COMMIT_MESSAGES}" https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendDocument

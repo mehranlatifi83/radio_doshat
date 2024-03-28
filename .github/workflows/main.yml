@@ -1,0 +1,31 @@
+name: Send APK to Telegram
+
+on: 
+  push:
+    paths:
+      - 'app/release/*.apk'
+
+jobs:
+  send-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Get commit messages
+        id: get-commit-messages
+        run: |
+          echo "COMMIT_MESSAGES=$(git log --format='%H %s by %an' -n 5)" >> $GITHUB_ENV
+      
+      - name: Find APK file
+        id: find-apk
+        run: |
+          apk_path=$(find ./app/release -name '*.apk' | head -n 1)
+          echo "::set-output name=apk_path::$apk_path"
+      
+      - name: Send APK to Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: 6466546352:AAHRMTWju6CZoK7pqWIaVbWLpeiSgbCbSic
+          CHAT_ID: -1002081135128
+        run: |
+          curl -F document=@${{ steps.find-apk.outputs.apk_path }} -F chat_id=$CHAT_ID -F caption="${{ env.COMMIT_MESSAGES }}" https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendDocument

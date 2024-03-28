@@ -19,4 +19,8 @@
     <string name="now_playing_with_next_song">Now playing %1$s - Next song: %2$s</string>
     <string name="now_playing">Now playing %1$s</string>
     <string name="app_logo_discription">The image features the logo of Radio Doshat set against an orange background. At the center is an inverted heart containing two microphones facing each other, symbolizing sound and a passion for music. At the bottom of the image, the name "Radio Doshat" is written in white English lettering.</string>
+    <string name="battery_optimization_title">Disable Battery Optimization</string>
+    <string name="battery_optimization_message">Please allow disabling battery optimization for radio playback in the background when the screen is off.</string>
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">Cancel</string>
 </resources>

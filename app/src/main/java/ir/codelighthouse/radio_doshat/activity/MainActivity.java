@@ -1,4 +1,4 @@
-package ir.codelighthouse.radio_doshat;
+package ir.codelighthouse.radio_doshat.activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +30,8 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 
+import ir.codelighthouse.radio_doshat.R;
+
 public class MainActivity extends AppCompatActivity {
 
 	private ExoPlayer player;
@@ -44,14 +46,12 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		playButton = findViewById(R.id.playButton);
-		playButton.setVisibility(View.GONE);
-		statusBar = findViewById(R.id.statusBar);
-
-		playButton.setOnClickListener(v -> togglePlayback());
-
+		initializeUIComponents();
 		requestDisableBatteryOptimization();
+		setupNetworkChangeReceiver();
+	}
+
+	private void setupNetworkChangeReceiver() {
 		networkChangeReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -78,15 +78,30 @@ public class MainActivity extends AppCompatActivity {
 		};
 	}
 
+	private void initializeUIComponents() {
+		playButton = findViewById(R.id.playButton);
+		playButton.setVisibility(View.GONE);
+		statusBar = findViewById(R.id.statusBar);
+		playButton.setOnClickListener(v -> togglePlayback());
+	}
+
 	@Override
 	protected void onStart() {
 		super.onStart();
+		registerNetworkChangeReceiver();
+	}
+
+	private void registerNetworkChangeReceiver() {
 		registerReceiver(networkChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
+		unregisterNetworkChangeReceiver();
+	}
+
+	private void unregisterNetworkChangeReceiver() {
 		unregisterReceiver(networkChangeReceiver);
 	}
 
@@ -116,20 +131,36 @@ public class MainActivity extends AppCompatActivity {
 	private void updatePlaybackState(int state) {
 		switch (state) {
 			case Player.STATE_BUFFERING:
-				showToast(getString(R.string.loading));
+				handleStateBuffering();
 				break;
 			case Player.STATE_READY:
-				playButton.setText(player.isPlaying() ? getString(R.string.pause) : getString(R.string.play));
+				handleStateReady();
 				break;
 			case Player.STATE_ENDED:
-				playButton.setText(getString(R.string.play));
-				playUrl();
-				togglePlayback();
+				handleStateEnded();
 				break;
 			case Player.STATE_IDLE:
-				playButton.setText(getString(R.string.play));
+				handleStateIdle();
 				break;
 		}
+	}
+
+	private void handleStateBuffering() {
+		showToast(getString(R.string.loading));
+	}
+
+	private void handleStateReady() {
+		playButton.setText(player.isPlaying() ? getString(R.string.pause) : getString(R.string.play));
+	}
+
+	private void handleStateEnded() {
+		playButton.setText(getString(R.string.play));
+		playUrl();
+		togglePlayback();
+	}
+
+	private void handleStateIdle() {
+		playButton.setText(getString(R.string.play));
 	}
 
 	private void playUrl() {
@@ -230,22 +261,34 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void requestDisableBatteryOptimization() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-			String packageName = getPackageName();
-			PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
-			if (!pm.isIgnoringBatteryOptimizations(packageName)) {
-				new AlertDialog.Builder(this)
-						.setTitle("اجازه غیرفعال کردن بهینه سازی باتری")
-						.setMessage("لطفا برای پخش شدن رادیو در پس زمینه در صورت خاموش شدن صفحه گوشی، لطفا اجازه غیرفعال کردن بهینه‌سازی باتری را بدهید.")
-						.setPositiveButton("باشه", (dialog, which) -> {
-							Intent intent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
-									.setData(Uri.parse("package:" + packageName));
-							startActivity(intent);
-						})
-						.setNegativeButton("لغو", null)
-						.show();
-			}
+		if (shouldShowBatteryOptimizationDialog()) {
+			showBatteryOptimizationDialog();
 		}
+	}
+
+	private boolean shouldShowBatteryOptimizationDialog() {
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !isIgnoringBatteryOptimizations();
+	}
+
+	private boolean isIgnoringBatteryOptimizations() {
+		String packageName = getPackageName();
+		PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
+		return pm.isIgnoringBatteryOptimizations(packageName);
+	}
+
+	private void showBatteryOptimizationDialog() {
+		new AlertDialog.Builder(this)
+				.setTitle(getString(R.string.battery_optimization_title))
+				.setMessage(getString(R.string.battery_optimization_message))
+				.setPositiveButton(getString(R.string.ok_button), (dialog, which) -> navigateToBatteryOptimizationSettings())
+				.setNegativeButton(getString(R.string.cancel_button), null)
+				.show();
+	}
+
+	private void navigateToBatteryOptimizationSettings() {
+		Intent intent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
+				.setData(Uri.parse("package:" + getPackageName()));
+		startActivity(intent);
 	}
 
 	private void showErrorMessage(String message) {
@@ -279,19 +322,19 @@ public class MainActivity extends AppCompatActivity {
 			player.release();
 		}
 	}
-
-	public void openSupportLink(View view) {
-		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_support)));
+	private void openLink(String url) {
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 		startActivity(browserIntent);
+	}
+	public void openSupportLink(View view) {
+		openLink(getString(R.string.url_support));
 	}
 
 	public void openTelegramLink(View view) {
-		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_telegram)));
-		startActivity(browserIntent);
+		openLink(getString(R.string.url_telegram));
 	}
 
 	public void openInstagramLink(View view) {
-		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_instagram)));
-		startActivity(browserIntent);
+		openLink(getString(R.string.url_instagram));
 	}
 }

@@ -19,4 +19,8 @@
     <string name="now_playing_with_next_song">در حال پخش %1$s - آهنگ بعدی: %2$s</string>
     <string name="now_playing">در حال پخش %1$s</string>
     <string name="app_logo_discription">تصویری از لوگوی رادیو دو شات را نشان می‌دهد که روی پس‌زمینه‌ای به رنگ نارنجی قرار دارد. در مرکز تصویر، یک قلب معکوس دیده می‌شود که دو میکروفون درون آن و رو به یکدیگر قرار گرفته‌اند که نمادی از صدا و علاقه به موسیقی است. در پایین تصویر، نام "رادیو دو شات" به خط سفید و به زبان انگلیسی نوشته شده است.</string>
+    <string name="battery_optimization_title">اجازه غیرفعال کردن بهینه سازی باتری</string>
+    <string name="battery_optimization_message">لطفا برای پخش شدن رادیو در پس زمینه در صورت خاموش شدن صفحه گوشی، اجازه غیرفعال کردن بهینه‌سازی باتری را بدهید.</string>
+    <string name="ok_button">باشه</string>
+    <string name="cancel_button">لغو</string>
 </resources>

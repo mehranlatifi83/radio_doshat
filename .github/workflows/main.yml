@@ -2,6 +2,8 @@ name: Send APK to Telegram
 
 on: 
   push:
+    branches:
+      - main
     paths:
       - 'app/release/*.apk'
 
@@ -14,7 +16,10 @@ jobs:
       
       - name: Get commit messages
         run: |
-          echo "COMMIT_MESSAGES=$(git log --format='%H %s by %an' -n 5)" >> $GITHUB_ENV
+          commit_count=$(git rev-list --count HEAD ^$(git merge-base HEAD main))
+          echo "COMMIT_COUNT=$commit_count" >> $GITHUB_ENV
+          commits=$(git log --format='%h: %s by %an' -n $commit_count)
+          echo "COMMIT_MESSAGES=$(echo "$commits")" >> $GITHUB_ENV
       
       - name: Find APK file
         run: |
@@ -26,4 +31,5 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          curl -F document="@${APK_PATH}" -F chat_id=$CHAT_ID -F caption="${COMMIT_MESSAGES}" https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendDocument
+          caption="🔨 $COMMIT_COUNT new commits to radio_doshat:main:\n\n$COMMIT_MESSAGES"
+          curl -F document="@${APK_PATH}" -F chat_id=$CHAT_ID -F caption="$caption" https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendDocument

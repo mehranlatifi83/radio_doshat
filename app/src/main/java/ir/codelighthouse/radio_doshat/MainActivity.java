@@ -1,4 +1,4 @@
-package ir.codelighthouse.radio_doshat.activity;
+package ir.codelighthouse.radio_doshat;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;

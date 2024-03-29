@@ -1,6 +1,6 @@
 name: Send APK to Telegram
 
-on: 
+on:
   push:
     branches:
       - main
@@ -13,14 +13,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      
-      - name: Get commit messages
+        with:
+          fetch-depth: 0 # فچ کامل تاریخچه برای محاسبه تعداد کامیت‌ها
+
+      - name: Get commit details
         run: |
-          commit_count=$(git rev-list --count HEAD ^$(git merge-base HEAD main))
+          # محاسبه تعداد کامیت‌های پوش شده با استفاده از SHA آخرین کامیت
+          commit_count=$(git rev-list --count HEAD ^${{ github.event.before }})
           echo "COMMIT_COUNT=$commit_count" >> $GITHUB_ENV
-          commits=$(git log --format='%h: %s by %an' -n $commit_count)
-          echo "COMMIT_MESSAGES=$(echo "$commits")" >> $GITHUB_ENV
-      
+          # گرفتن جزئیات کامیت‌های پوش شده
+          commit_details=$(git log --format='%h: %s by %an' -n $commit_count)
+          echo "COMMIT_DETAILS=$(echo "$commit_details")" >> $GITHUB_ENV
+
       - name: Find APK file
         run: |
           apk_path=$(find ./app/release -name '*.apk' | head -n 1)
@@ -31,5 +35,5 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          caption="🔨 $COMMIT_COUNT new commits to radio_doshat:main:\n\n$COMMIT_MESSAGES"
+          caption="🔨 $COMMIT_COUNT new commits to radio_doshat:main:\n\n$COMMIT_DETAILS"
           curl -F document="@${APK_PATH}" -F chat_id=$CHAT_ID -F caption="$caption" https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendDocument
